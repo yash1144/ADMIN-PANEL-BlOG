@@ -1,0 +1,120 @@
+<%- include('../header') -%>
+
+    <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
+        <!-- Navbar -->
+        <%- include('../navbar') -%>
+            <!-- End Navbar -->
+            <div class="container-fluid py-4">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card my-4">
+                            <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+                                <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
+                                    <h6 class="text-white text-capitalize ps-3">View Admins</h6>
+                                </div>
+                            </div>
+                            <div class="card-body px-0 pb-2">
+                                <div class="table-responsive p-0">
+                                    <table class="table align-items-center mb-0">
+                                        <thead>
+                                            <tr>
+                                                <th
+                                                    class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                                    #</th>
+                                                <th
+                                                    class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                                    Name</th>
+                                                <th
+                                                    class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                                    Email</th>
+                                                <th
+                                                    class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                                    Password</th>
+                                                <th
+                                                    class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                                    Contact</th>
+                                                <th
+                                                    class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                                    Gender</th>
+                                                <th
+                                                    class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                                    Hobby</th>
+                                                <th
+                                                    class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                                    Description</th>
+                                                <th
+                                                    class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                                    Avatar</th>
+                                                <th
+                                                    class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                                    Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <% admins.forEach((admin, index)=> { %>
+                                                <tr>
+                                                    <td>
+                                                        <p class="text-xs font-weight-bold mb-0 px-3">
+                                                            <%= index + 1 %>
+                                                        </p>
+                                                    </td>
+                                                    <td>
+                                                        <p class="text-xs font-weight-bold mb-0">
+                                                            <%= admin.firstName %>
+                                                                <%= admin.lastName %>
+                                                        </p>
+                                                    </td>
+                                                    <td>
+                                                        <p class="text-xs font-weight-bold mb-0">
+                                                            <%= admin.email %>
+                                                        </p>
+                                                    </td>
+                                                    <td>
+                                                        <div style="max-width: 150px; overflow-x: auto; white-space: nowrap;"
+                                                            class="text-xs font-weight-bold">
+                                                            <%= admin.password %>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <p class="text-xs font-weight-bold mb-0">
+                                                            <%= admin.contactNumber %>
+                                                        </p>
+                                                    </td>
+                                                    <td>
+                                                        <p class="text-xs font-weight-bold mb-0">
+                                                            <%= admin.gender %>
+                                                        </p>
+                                                    </td>
+                                                    <td>
+                                                        <p class="text-xs font-weight-bold mb-0">
+                                                            <% if (Array.isArray(admin.hobby) && admin.hobby.length) {
+                                                                %>
+                                                                <%= admin.hobby.join(', ') %><% } else { %>N/A<% } %></p>
+                                                    </td>
+                                                    <td>
+                                                        <p class="text-xs font-weight-bold mb-0"><%= admin.description %></p>
+                                                    </td>
+                                                    <td>
+                                                        <img src="<%= admin.profileImage %>" alt="Admin Image" height="50" width="50">
+                                                    </td>
+                                                    <td class="align-middle text-center">
+                                                        <a href="/admin/update-admin?adminId=<%= admin.id %>" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit admin">
+                                                            Update
+                                                        </a>
+                                                        <a href="/admin/delete-admin/<%= admin.id %>" class="text-secondary font-weight-bold text-xs ms-2" data-toggle="tooltip" data-original-title="Delete admin">
+                                                            Delete
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            <% }) %>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </main>
+
+    <%- include('../footer') -%>

@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Login</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #000;
+            --secondary-color: #2c3e50;
+            --page-bg-color: #222;
+            --text-color: #333;
+            --card-bg-color: #ffffff;
+            --input-border-color: #e0e0e0;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            position: relative;
+            z-index: 0;
+        }
+
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 50%;
+            height: 100%;
+            background-color: rgb(30, 30, 30);
+            z-index: -1;
+        }
+
+        .login-container {
+            display: flex;
+            width: 900px;
+            max-width: 90vw;
+            height: 600px;
+            background-color: var(--card-bg-color);
+            border-radius: 20px;
+            box-shadow: 1px 60px 100px #000;
+            overflow: hidden;
+        }
+
+        .login-image-panel {
+            flex: 1;
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1497294815431-9365093b7331?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1950&q=80') no-repeat center center;
+            background-size: cover;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 40px;
+            color: white;
+        }
+
+        .login-image-panel h2 {
+            font-size: 2.8rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .login-image-panel p {
+            font-size: 1.1rem;
+        }
+
+        .login-form-panel {
+            flex: 1;
+            padding: 60px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background-color: var(--card-bg-color);
+        }
+
+        .login-form-panel h1 {
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--secondary-color);
+        }
+
+        .login-form-panel p {
+            margin-bottom: 30px;
+            color: #777;
+        }
+
+        .input-group {
+            position: relative;
+            margin-bottom: 25px;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid var(--input-border-color);
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        .btn-login {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            background-color: var(--primary-color);
+            color: white;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-bottom: 20px;
+        }
+
+        .btn-login:hover {
+            background-color: #333;
+        }
+
+        .flash-message {
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+
+        .flash-error {
+            background-color: #fee;
+            color: #c53030;
+            border: 1px solid #fed7d7;
+        }
+
+        .flash-success {
+            background-color: #f0fff4;
+            color: #2f855a;
+            border: 1px solid #c6f6d5;
+        }
+
+        .register-link {
+            text-align: center;
+            color: #777;
+        }
+
+        .register-link a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .register-link a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .login-container {
+                flex-direction: column;
+                width: 100%;
+                height: auto;
+                max-width: 100vw;
+                border-radius: 0;
+            }
+
+            .login-image-panel {
+                display: none;
+            }
+
+            .login-form-panel {
+                padding: 40px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="login-container">
+        <div class="login-image-panel">
+            <h2>Blog World</h2>
+            <p>Discover Amazing Stories & Insights</p>
+        </div>
+        <div class="login-form-panel">
+            <h1>Welcome Back!</h1>
+            <p>Please enter your credentials to access your account.</p>
+
+            <!-- Flash Messages -->
+            <% if (flash.error && flash.error.length) { %>
+                <div class="flash-message flash-error">
+                    <%= flash.error[0] %>
+                </div>
+                <% } %>
+                    <% if (flash.success && flash.success.length) { %>
+                        <div class="flash-message flash-success">
+                            <%= flash.success[0] %>
+                        </div>
+                        <% } %>
+
+                            <form action="/user/login" method="POST">
+                                <div class="input-group">
+                                    <input type="email" id="email" name="email" placeholder="Email Address" required
+                                        autocomplete="email">
+                                </div>
+                                <div class="input-group">
+                                    <input type="password" id="password" name="password" placeholder="Password" required
+                                        autocomplete="current-password">
+                                </div>
+                                <button type="submit" class="btn-login">Sign In</button>
+                            </form>
+
+                            <div class="register-link">
+                                <p>Don't have an account? <a href="/user/register">Sign up here</a></p>
+                            </div>
+        </div>
+    </div>
+</body>
+
+</html>
